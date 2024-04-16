@@ -4,10 +4,7 @@ import com.restfulweb.demowebproject.model.UserLogin;
 import com.restfulweb.demowebproject.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 public class UserController {
@@ -20,4 +17,10 @@ public class UserController {
             return userService.createUser(user);
 
         }
+    @GetMapping("/User/{userName}")
+    public ResponseEntity<String> getUser (@PathVariable String userName ){
+
+        return userService.getUser(userName);
+
+    }
     }

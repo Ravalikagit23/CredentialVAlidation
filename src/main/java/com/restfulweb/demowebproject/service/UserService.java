@@ -9,6 +9,8 @@ import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.RequestBody;
 
+import java.util.Optional;
+
 @Service
 @Component
 public class UserService {
@@ -20,4 +22,20 @@ public class UserService {
     userDao.save(user1);
         return new ResponseEntity<>("Sucess",HttpStatus.OK);
     }
-}
+
+    public ResponseEntity<String> getUser(String userName) {
+
+
+       Optional<UserLogin> userLoginOptional=userDao.findById(userName);//Asking
+
+        //if userLoginOptional has data return success
+        if(userLoginOptional.isPresent()){
+            return new ResponseEntity<>("success",HttpStatus.OK);
+        }
+       else { //else return unsuccess
+
+            return new ResponseEntity<>("unSucessful", HttpStatus.BAD_REQUEST);
+        }
+    }
+
+    }
